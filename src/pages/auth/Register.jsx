@@ -1,17 +1,20 @@
-import React from 'react';
-import useSignup from '../../hooks/useUserAPI';
-import { useNavigate, useNavigation } from 'react-router-dom';
+import React, { useRef } from 'react';
+import useUserAPI from '../../hooks/useUserAPI';
+import { Link } from 'react-router-dom';
 
 const Register = () => {
-  const form = useRef();
-  const navigate = useNavigate();
-  const navigation = useNavigation();
+  const formRef = useRef(null);
 
-  const { loading, error, registerUser } = useSignup();
+  const { loading, error, registerUser } = useUserAPI();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    registerUser(form.current);
+    const formRefData = {
+      email: formRef.current.email.value,
+      password: formRef.current.password.value,
+      confirmPassword: formRef.current.confirmPassword.value,
+    };
+    registerUser(formRefData);
   };
 
   return (
@@ -20,7 +23,7 @@ const Register = () => {
         <h1>Register Now!</h1>
 
         <div className="">
-          <form ref={form} onSubmit={handleSubmit} className="flex flex-col">
+          <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col">
             <input type="email" id="email" name="email" placeholder="e-mail" />
 
             <input

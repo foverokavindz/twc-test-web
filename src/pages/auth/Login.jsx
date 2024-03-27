@@ -1,12 +1,21 @@
-import React, { useRef, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useRef } from 'react';
+import useUserAPI from '../../hooks/useUserAPI';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
-  const { login } = useAuth();
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(null);
+  const formRef = useRef();
 
-  const form = useRef();
+  const { loading, error, loginUser } = useUserAPI();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formRefData = {
+      email: formRef.current.email.value,
+      password: formRef.current.password.value,
+    };
+    loginUser(formRefData);
+  };
+
   return (
     <>
       <div className="">
@@ -14,7 +23,7 @@ const Login = () => {
         <h2>Welcome to our contacts portal</h2>
       </div>
       <div className="">
-        <form ref={form} className="flex flex-col">
+        <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col">
           <input type="email" id="email" name="email" placeholder="e-mail" />
 
           <input
@@ -25,11 +34,15 @@ const Login = () => {
           />
 
           <div className="flex flex-row">
-            <button type="submit">Login</button> or
+            <button type="submit" disabled={loading}>
+              {loading ? 'Processing...' : 'login'}
+            </button>{' '}
+            or
             <Link to="/register">Click here to Register</Link>
           </div>
         </form>
       </div>
+      {error && <div>{error}</div>}
     </>
   );
 };

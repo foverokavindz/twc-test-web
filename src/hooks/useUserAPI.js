@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 
 const BASE_URL = 'http://localhost:5000/api';
@@ -8,7 +9,7 @@ const useUserAPI = () => {
   const [loading, setLoading] = useState(null);
 
   const registerUser = async (values) => {
-    if (values.passwrord !== values.confirmPassword) {
+    if (values.password !== values.confirmPassword) {
       setError('Passwords do not match');
       return;
     }

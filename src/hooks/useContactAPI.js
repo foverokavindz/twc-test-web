@@ -80,10 +80,10 @@ const useContactsAPI = () => {
       });
       const data = await res.json();
 
-      if (res.status === 200) {
+      if (res.status === 201) {
         //message.success(data.message);
         setContacts(contacts.filter((contact) => contact._id !== contactId));
-      } else if (res.status === 404) {
+      } else if (res.status === 400) {
         setError(data.message);
       } else {
         //message.error('Deleting contact failed');
@@ -109,7 +109,7 @@ const useContactsAPI = () => {
       });
       const data = await res.json();
 
-      if (res.status === 200) {
+      if (res.status === 201) {
         //message.success(data.message);
 
         setContacts(
