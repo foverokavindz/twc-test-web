@@ -7,6 +7,7 @@ import Contacts from './pages/Contacts';
 import Register from './pages/auth/Register';
 import ErrorPage from './pages/ErrorPage';
 import './App.css';
+import NewContact from './pages/NewContact';
 
 const router = createBrowserRouter([
   {
@@ -20,7 +21,10 @@ const router = createBrowserRouter([
       },
       {
         path: 'contacts',
-        element: <Contacts />,
+        children: [
+          { index: true, element: <Contacts /> },
+          { path: 'new', element: <NewContact /> },
+        ],
       },
       {
         path: 'login',
