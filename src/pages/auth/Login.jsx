@@ -38,7 +38,7 @@ const Login = () => {
               {loading ? 'Processing...' : 'login'}
             </button>{' '}
             or
-            <Link to="/register">Click here to Register</Link>
+            <Link to="register">Click here to Register</Link>
           </div>
         </form>
       </div>

@@ -9,6 +9,9 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    console.log('formRef   ', formRef);
+    console.log('formRef.current.email  ', formRef.current.email.value);
     const formRefData = {
       email: formRef.current.email.value,
       password: formRef.current.password.value,
@@ -35,8 +38,8 @@ const Register = () => {
 
             <input
               type="password"
-              id="confirm-password"
-              name="confirm-password"
+              id="confirmPassword"
+              name="confirmPassword"
               placeholder="confirm password"
             />
 
@@ -49,7 +52,7 @@ const Register = () => {
         </div>
       </div>
       {error && <div>{error}</div>}
-      <Link to="/register">Back to login</Link>
+      <Link to="..">Back to login</Link>
     </>
   );
 };
