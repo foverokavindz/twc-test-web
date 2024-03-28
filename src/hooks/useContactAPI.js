@@ -19,20 +19,24 @@ const useContactAPI = () => {
           'Content-Type': 'application/json',
           'x-auth-token': token,
         },
-        body: JSON.stringify(values),
       });
       const data = await res.json();
 
       if (res.status === 201) {
         //message.success(data.message);
         setContacts(data.contact);
+        console.log('contacts  --- ', contacts);
       } else if (res.status === 400) {
         setError(data.message);
+        console.log('data.message', data.message);
       } else {
         //message.error('Registration failed');
+        console.log('data.message', data.message);
       }
     } catch (error) {
       setError(error.message);
+
+      console.log('error', error);
     } finally {
       setLoading(false);
     }
@@ -133,11 +137,10 @@ const useContactAPI = () => {
     loading,
     error,
     contacts,
-    getContacts,
     addContact,
+    getContacts,
     deleteContact,
     updateContact,
   };
 };
-
 export default useContactAPI;
