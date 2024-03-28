@@ -3,7 +3,7 @@ import { useAuth } from '../context/AuthContext';
 
 const BASE_URL = 'http://localhost:5000/api';
 
-const useContactsAPI = () => {
+const useContactAPI = () => {
   const { token } = useAuth();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(null);
@@ -140,4 +140,4 @@ const useContactsAPI = () => {
   };
 };
 
-export default useContactsAPI;
+export default useContactAPI;
