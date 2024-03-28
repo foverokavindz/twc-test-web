@@ -36,7 +36,8 @@ const useUserAPI = () => {
       if (res.status === 201) {
         //message.success(data.message);
         login(data.token, data.user);
-        navigate('/login');
+
+        navigate('..');
       } else if (res.status === 400) {
         setError(data.message);
       } else {
