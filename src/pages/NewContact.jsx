@@ -4,7 +4,7 @@ import useContactAPI from '../hooks/useContactAPI';
 const NewContact = () => {
   const formRef = useRef();
 
-  const { loading, error, addContact } = useContactAPI();
+  const { loading, error, addContact, getContacts, contacts } = useContactAPI();
 
   const handleSubmit = (e) => {
     e.preventDefault();

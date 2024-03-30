@@ -1,17 +1,25 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import exitIcon from '../assets/exitIcon.png';
+import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const BottomBar = () => {
+  const { logout, isAuthentiated } = useAuth();
+  const navigate = useNavigate();
+
+  if (!isAuthentiated) {
+    navigate('/login');
+  }
+
   return (
     <div>
-      <Link
-        to="/login"
-        className="font-['poppins']  text-[1.438rem] leading-[3.125rem]   text-white  underline cursor-pointer flex flex-row justify-between items-center gap-5"
+      <button
+        onClick={() => logout()}
+        className="font-['poppins']  text-[1.438rem] leading-[3.125rem] text-white  underline cursor-pointer flex flex-row justify-between items-center gap-5"
       >
         <img src={exitIcon} width={43} height={43} />
         logout
-      </Link>
+      </button>
     </div>
   );
 };

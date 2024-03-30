@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import useContactAPI from '../hooks/useContactAPI';
 
 const Home = () => {
+  const { loading, error, getContacts, contacts } = useContactAPI();
+
+  useEffect(() => {
+    getContacts();
+  }, []);
+
   return (
     <>
       <div className="container max-w-screen-xl text-white">
@@ -12,12 +19,22 @@ const Home = () => {
           This is where your contacts will live. Click the button below{' '}
           <br></br> to add a new contact.
         </p>
-        <Link
-          to="/contacts/new"
-          className="px-12 py-1 border-[2px] rounded-full font-['poppins']  text-[1.438rem] leading-[3.125rem]   text-white "
-        >
-          add your first contact
-        </Link>
+
+        {contacts.length > 0 ? (
+          <Link
+            to="contacts"
+            className="px-12 py-1 border-[2px] rounded-full font-['poppins']  text-[1.438rem] leading-[3.125rem]   text-white "
+          >
+            View Contacts
+          </Link>
+        ) : (
+          <Link
+            to="contacts/new"
+            className="px-12 py-1 border-[2px] rounded-full font-['poppins']  text-[1.438rem] leading-[3.125rem]   text-white "
+          >
+            add your first contact
+          </Link>
+        )}
       </div>
     </>
   );

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 
 const BASE_URL = 'http://localhost:5000/api';
@@ -9,7 +9,7 @@ const useContactAPI = () => {
   const [loading, setLoading] = useState(null);
   const [contacts, setContacts] = useState([]);
 
-  const getContacts = async (values) => {
+  const getContacts = async () => {
     try {
       setError(null);
       setLoading(true);
@@ -20,12 +20,20 @@ const useContactAPI = () => {
           'x-auth-token': token,
         },
       });
+
+      if (!res.ok) {
+        throw new Error('Failed to fetch contacts');
+      }
+
       const data = await res.json();
 
-      if (res.status === 201) {
+      setContacts(data.data);
+      console.log('contacts  --- ', contacts);
+
+      if (res.status === 200) {
         //message.success(data.message);
-        setContacts(data.contact);
-        console.log('contacts  --- ', contacts);
+        // setContacts(data.contact);
+        // console.log('contacts  --- ', contacts);
       } else if (res.status === 400) {
         setError(data.message);
         console.log('data.message', data.message);

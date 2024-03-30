@@ -16,3 +16,24 @@
     url('./assets/fonts/futura_medium_bt.ttf') format('truetype');
   font-weight: 700;
 }
+
+/* Hide the scrollbar by default */
+::-webkit-scrollbar {
+  width: 8px; /* Set the width of the scrollbar */
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f100; /* Set track color */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; /* Set scrollbar handle color */
+  border-radius: 4px; /* Rounded corners for the handle */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Set scrollbar handle color on hover */
+}

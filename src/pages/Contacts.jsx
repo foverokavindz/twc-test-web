@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import maleImg from '../assets/male.png';
 import femaleImg from '../assets/female.png';
 import useContactAPI from '../hooks/useContactAPI';
+import pencil from '../assets/pencil.svg';
+import trash from '../assets/trash.svg';
 
 const Contacts = () => {
   const {
@@ -18,11 +20,9 @@ const Contacts = () => {
     getContacts();
   }, []);
 
-  console.log('contacts   ', contacts);
-
   return (
     <>
-      <div className="container max-w-screen-xl text-white">
+      <div className="container max-w-screen-xl text-white mb-10">
         <div className="flex flex-row justify-between items-center mb-10">
           <h1 className=" text-[50px] leading-[73px] font-['poppins'] font-bold ">
             Contacts
@@ -35,40 +35,60 @@ const Contacts = () => {
           </Link>
         </div>
 
-        <div className="rounded-3xl p-3 bg-white">
-          <table className="w-full text-sm text-left rtl:text-right text-gray-500 ">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50">
-              <tr>
-                <th scope="col" className="px-3 py-3"></th>
-                <th scope="col" className="px-6 py-3">
-                  full name
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  gender
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  email
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  phone number
-                </th>
-                <th scope="col" className="px-6 py-3"></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="bg-white border-b">
-                <th
-                  scope="row"
-                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
-                >
-                  Apple MacBook Pro 17"
-                </th>
-                <td className="px-6 py-4">Silver</td>
-                <td className="px-6 py-4">Laptop</td>
-                <td className="px-6 py-4">$2999</td>
-              </tr>
-            </tbody>
-          </table>
+        <div className="rounded-3xl px-7 py-4 bg-white max-h-[390px] overflow-y-scroll">
+          {loading ? (
+            <p>Loading ...</p>
+          ) : (
+            <table className="w-full  text-left rtl:text-right text-[#083F46] ">
+              <thead className="text-xs ">
+                <tr className="text-[18px] leading-[50px] font-['poppins'] font-bold">
+                  <th scope="col" className="px-3 py-3"></th>
+                  <th scope="col" className="px-3 py-3">
+                    full name
+                  </th>
+                  <th scope="col" className="px-3 py-3">
+                    gender
+                  </th>
+                  <th scope="col" className="px-3 py-3">
+                    email
+                  </th>
+                  <th scope="col" className="px-3 py-3">
+                    phone number
+                  </th>
+                  <th scope="col" className="px-3 py-3"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {contacts.map((contact) => {
+                  return (
+                    <tr
+                      key={contact._id}
+                      className="bg-white border-b text-[20px] leading-[50px] font-['poppins'] "
+                    >
+                      <td className="px-2 py-4 ">
+                        <img
+                          src={contact.gender === 'male' ? maleImg : femaleImg}
+                          className="w-[60px] h-[60px] rounded-full"
+                        />
+                      </td>
+                      <td className="px-3 py-4">{contact.fullName}</td>
+                      <td className="px-3 py-4">{contact.gender}</td>
+                      <td className="px-3 py-4">{contact.email}</td>
+                      <td className="px-3 py-4">{contact.phoneNumber}</td>
+                      <td className="px-3 py-4  ">
+                        <button>
+                          <img src={pencil} className="w-5 mr-5 " />
+                        </button>
+                        <button>
+                          <img src={trash} className="w-5  " />
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          )}
         </div>
       </div>
     </>
