@@ -36,8 +36,14 @@ const Contacts = () => {
         </div>
 
         <div className="rounded-3xl px-7 py-4 bg-white max-h-[390px] overflow-y-scroll">
-          {loading ? (
-            <p>Loading ...</p>
+          {contacts.length === 0 ? (
+            <p className="text-[20px] leading-[50px]  font-['poppins'] text-gray-600 text-center">
+              Not found any contacts
+            </p>
+          ) : loading ? (
+            <p className="text-[20px] leading-[50px]  font-['poppins'] text-gray-600 text-center">
+              Loading ...
+            </p>
           ) : (
             <table className="w-full  text-left rtl:text-right text-[#083F46] ">
               <thead className="text-xs ">

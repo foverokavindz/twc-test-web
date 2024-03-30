@@ -6,8 +6,8 @@ import AuthRootLayout from './pages/auth/AuthRootLayout';
 import Contacts from './pages/Contacts';
 import Register from './pages/auth/Register';
 import ErrorPage from './pages/ErrorPage';
-import './App.css';
 import NewContact from './pages/NewContact';
+import './App.css';
 
 const router = createBrowserRouter([
   {
