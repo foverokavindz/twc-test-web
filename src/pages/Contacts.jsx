@@ -8,6 +8,7 @@ import trash from '../assets/trash.svg';
 import change from '../assets/change.svg';
 import MessageModal from '../components/MessageModal';
 
+// The Contacts component displays a list of contacts.
 const Contacts = () => {
   const {
     contacts,
@@ -28,6 +29,7 @@ const Contacts = () => {
     confirmationModal: false,
   });
 
+  // The toggleGender function toggles the gender state
   const toggleGender = () => {
     setSelectedContact((prevState) => ({
       ...prevState,
@@ -44,6 +46,7 @@ const Contacts = () => {
     }));
   };
 
+  // The changeData function updates the contact data
   const changeData = (e) => {
     setUpdateContactData((prevState) => ({
       ...prevState,
@@ -56,6 +59,7 @@ const Contacts = () => {
     }));
   };
 
+  // The handleUpdate function updates a contact
   const handleUpdate = async (id, data) => {
     await updateContact(id, { ...data });
 
@@ -64,6 +68,7 @@ const Contacts = () => {
     setUpdateContactData({});
   };
 
+  // The handleDelete function deletes a contact
   const handleDelete = (id, name) => {
     setSelectedContact({ _id: id });
     toggleModal();
@@ -77,6 +82,7 @@ const Contacts = () => {
     );
   };
 
+  // The onConfirmation function confirms the deletion of a contact
   const onConfirmation = (choice) => {
     //setIsConfirmation(!isConfirmation);
     if (choice) {
@@ -98,6 +104,7 @@ const Contacts = () => {
     getContacts();
   }, []);
 
+  // The updateInputBoxes array contains the input boxes for updating a contact.
   const updateInputBoxes = [
     {
       id: 1,
@@ -298,6 +305,7 @@ const Contacts = () => {
         </div>
       </div>
 
+      {/* The MessageModal component is a modal that displays a message to the user. */}
       <MessageModal
         isModelOpened={isModelOpened}
         showModal={showModal}

@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom';
 import backgroundImage from '../../assets/background.jpg';
 import logo from '../../assets/logo.png';
 
+// The AuthRootLayout component is a layout component that wraps the authentication pages.
 const AuthRootLayout = () => {
   return (
     <>

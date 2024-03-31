@@ -2,9 +2,11 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import useContactAPI from '../hooks/useContactAPI';
 
+// The Home component is the home page of the application.
 const Home = () => {
   const { loading, error, getContacts, contacts } = useContactAPI();
 
+  // The useEffect hook is used to fetch contacts when the component mounts.
   useEffect(() => {
     getContacts();
   }, []);

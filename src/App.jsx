@@ -11,6 +11,7 @@ import ProtectedRoutes from './components/ProtectedRoutes';
 import './App.css';
 
 function App() {
+  // The createBrowserRouter function creates a router object that can be used to navigate between pages.
   const router = createBrowserRouter([
     {
       path: '/',
@@ -58,6 +59,7 @@ function App() {
     },
   ]);
 
+  // The RouterProvider component provides the router object to the application.
   return <RouterProvider router={router} />;
 }
 

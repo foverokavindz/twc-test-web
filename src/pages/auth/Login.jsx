@@ -2,11 +2,13 @@ import React, { useRef } from 'react';
 import useUserAPI from '../../hooks/useUserAPI';
 import { Link } from 'react-router-dom';
 
+// The Login component is the login page of the application.
 const Login = () => {
   const formRef = useRef();
 
   const { loading, error, loginUser } = useUserAPI();
 
+  // The handleSubmit function is called when the form is submitted.
   const handleSubmit = (e) => {
     e.preventDefault();
     const formRefData = {

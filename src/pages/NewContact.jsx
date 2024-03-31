@@ -1,11 +1,13 @@
 import { useRef } from 'react';
 import useContactAPI from '../hooks/useContactAPI';
 
+// The NewContact component is used to add a new contact.
 const NewContact = () => {
   const formRef = useRef();
 
   const { loading, error, addContact, getContacts, contacts } = useContactAPI();
 
+  // The handleSubmit function is called when the form is submitted.
   const handleSubmit = (e) => {
     e.preventDefault();
     const formRefData = {

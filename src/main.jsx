@@ -8,6 +8,7 @@ import './assets/fonts/futura_light_bt.ttf';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+    {/* The AuthProvider component provides the authentication context for the application. */}
     <AuthProvider>
       <App />
     </AuthProvider>

@@ -2,12 +2,10 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import Topbar from '../components/Topbar';
 import BottomBar from '../components/BottomBar';
 import backgroundImage from '../assets/background.jpg';
-//import { useAuth } from '../context/AuthContext';
 
+// The RootLayout component is a layout component that wraps the entire application.
 function RootLayout() {
   const location = useLocation();
-  // const navigate = useNavigate();
-  // const { isAuthentiated } = useAuth();
 
   const isLoginPage = location.pathname.includes('login');
 

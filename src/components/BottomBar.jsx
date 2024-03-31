@@ -3,6 +3,7 @@ import exitIcon from '../assets/exitIcon.png';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
+// The BottomBar component is a bar at the bottom of the screen that allows the user to log out.
 const BottomBar = () => {
   const { logout, isAuthentiated } = useAuth();
   const navigate = useNavigate();

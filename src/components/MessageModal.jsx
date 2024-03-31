@@ -1,5 +1,6 @@
 import React from 'react';
 
+// The MessageModal component is a modal that displays a message to the user.
 const MessageModal = ({
   handlePopupClose,
   onConfirmation,

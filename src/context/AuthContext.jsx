@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { createContext } from 'react';
 
+// The AuthContext component provides the authentication context for the application.
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -9,6 +10,7 @@ export const AuthProvider = ({ children }) => {
   const [isAuthentiated, setIsAuthenticated] = useState(false);
   const storedData = JSON.parse(localStorage.getItem('user_data'));
 
+  // The useEffect hook checks if the user data is stored in local storage and sets the user token and data in state.
   useEffect(() => {
     if (storedData) {
       const { userToken, user } = storedData;
@@ -18,6 +20,7 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
+  // The login function sets the user token and data in local storage and sets the user token and data in state.
   const login = (newToken, newData) => {
     localStorage.setItem(
       'user_data',
@@ -29,6 +32,7 @@ export const AuthProvider = ({ children }) => {
     setIsAuthenticated(true);
   };
 
+  // The logout function removes the user token and data from local storage and sets the user token and data in state to null.
   const logout = () => {
     localStorage.removeItem('user_data');
     setToken(null);
@@ -36,6 +40,7 @@ export const AuthProvider = ({ children }) => {
     setIsAuthenticated(false);
   };
 
+  // The contextValue object contains the token, isAuthenticated, userData, login, and logout values.
   const contextValue = {
     token,
     isAuthentiated,
@@ -49,4 +54,5 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
+// The useAuth hook returns the authentication context.
 export const useAuth = () => useContext(AuthContext);

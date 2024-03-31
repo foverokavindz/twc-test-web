@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
+// The useContactAPI hook provides functions to interact funtions which are related to contacts.
 const useContactAPI = () => {
   const { token } = useAuth();
   const [error, setError] = useState(null);
@@ -17,6 +18,7 @@ const useContactAPI = () => {
     setIsModelOpened(!isModelOpened);
   };
 
+  // The getContacts function fetches the contacts from the server.
   const getContacts = async () => {
     try {
       setError(null);
@@ -35,18 +37,12 @@ const useContactAPI = () => {
 
       const data = await res.json();
 
-      setContacts(data.data);
-      console.log('contacts  --- ', contacts);
-
       if (res.status === 200) {
-        //message.success(data.message);
-        // setContacts(data.contact);
-        // console.log('contacts  --- ', contacts);
+        setContacts(data.data);
       } else if (res.status === 400) {
         setError(data.message);
         console.log('data.message', data.message);
       } else {
-        //message.error('Registration failed');
         console.log('data.message', data.message);
       }
     } catch (error) {
@@ -58,6 +54,7 @@ const useContactAPI = () => {
     }
   };
 
+  // The addContact function adds a contact to the server.
   const addContact = async (values) => {
     try {
       setError(null);
@@ -73,13 +70,12 @@ const useContactAPI = () => {
       const data = await res.json();
 
       if (res.status === 201) {
-        //message.success(data.message);
         setContacts([...contacts, data.contact]);
         navigate('/contacts');
       } else if (res.status === 400) {
         setError(data.message);
       } else {
-        //message.error('Adding contact failed');
+        setError('Adding contact failed');
       }
     } catch (error) {
       setError(error.message);
@@ -88,6 +84,7 @@ const useContactAPI = () => {
     }
   };
 
+  // The deleteContact function deletes a contact from the server.
   const deleteContact = async (contactId) => {
     try {
       setError(null);
@@ -102,13 +99,12 @@ const useContactAPI = () => {
       const data = await res.json();
 
       if (res.status === 201) {
-        //message.success(data.message);
         setContacts(contacts.filter((contact) => contact._id !== contactId));
         setIsModelOpened(true);
       } else if (res.status === 400) {
         setError(data.message);
       } else {
-        //message.error('Deleting contact failed');
+        setError('Deleting contact failed');
       }
     } catch (error) {
       setError(error.message);
@@ -117,6 +113,7 @@ const useContactAPI = () => {
     }
   };
 
+  // The updateContact function updates a contact on the server.
   const updateContact = async (contactId, values) => {
     try {
       setError(null);
@@ -143,7 +140,7 @@ const useContactAPI = () => {
       } else if (res.status === 400) {
         setError(data.message);
       } else {
-        //message.error('Updating contact failed');
+        setError('Updating contact failed');
       }
     } catch (error) {
       setError(error.message);

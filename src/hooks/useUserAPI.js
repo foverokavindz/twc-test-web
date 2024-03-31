@@ -4,12 +4,14 @@ import { useNavigate } from 'react-router-dom';
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
+// The useUserAPI hook provides functions to authenticate the user.
 const useUserAPI = () => {
   const { login } = useAuth();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(null);
   const navigate = useNavigate();
 
+  // The registerUser function registers a new user.
   const registerUser = async (values) => {
     if (values.password !== values.confirmPassword) {
       setError('Passwords do not match');
@@ -34,22 +36,22 @@ const useUserAPI = () => {
       const data = await res.json();
 
       if (res.status === 201) {
-        //message.success(data.message);
         login(data.token, data.user);
 
         navigate('..');
       } else if (res.status === 400) {
         setError(data.message);
       } else {
-        //message.error('Registration failed');
+        setError('Registration failed');
       }
     } catch (error) {
-      //message.error(error);
+      setError(error);
     } finally {
       setLoading(false);
     }
   };
 
+  // The loginUser function logs in a user.
   const loginUser = async (values) => {
     console.log('BASE_URL', BASE_URL);
     try {
@@ -65,13 +67,12 @@ const useUserAPI = () => {
       const data = await res.json();
 
       if (res.status === 201) {
-        //message.success(data.message);
         login(data.token, data.user);
         navigate('/');
       } else if (res.status === 400) {
         setError(data.message);
       } else {
-        //message.error('Registration failed');
+        setError('Registration failed');
       }
     } catch (error) {
       setError(error.message);

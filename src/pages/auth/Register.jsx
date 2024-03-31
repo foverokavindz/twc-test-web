@@ -2,11 +2,13 @@ import React, { useRef } from 'react';
 import useUserAPI from '../../hooks/useUserAPI';
 import { Link } from 'react-router-dom';
 
+// The Register component is a page that allows users to register for an account.
 const Register = () => {
   const formRef = useRef(null);
 
   const { loading, error, registerUser } = useUserAPI();
 
+  // The handleSubmit function is called when the form is submitted.
   const handleSubmit = (e) => {
     e.preventDefault();
 
