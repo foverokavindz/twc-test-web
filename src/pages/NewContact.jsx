@@ -16,6 +16,7 @@ const NewContact = () => {
     };
 
     addContact(formRefData);
+    formRef.current.reset();
   };
 
   return (

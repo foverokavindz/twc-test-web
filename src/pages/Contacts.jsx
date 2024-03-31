@@ -6,12 +6,15 @@ import useContactAPI from '../hooks/useContactAPI';
 import pencil from '../assets/pencil.svg';
 import trash from '../assets/trash.svg';
 import change from '../assets/change.svg';
+import MessageModal from '../components/MessageModal';
 
 const Contacts = () => {
   const {
     contacts,
     loading,
     error,
+    isModelOpened,
+    toggleModal,
     getContacts,
     deleteContact,
     updateContact,
@@ -20,6 +23,11 @@ const Contacts = () => {
   const [index, setIndex] = useState(null);
   const [selectedContact, setSelectedContact] = useState({});
   const [updateContactData, setUpdateContactData] = useState({});
+  //const [isConfirmation, setIsConfirmation] = useState(false);
+  const [showModal, setshowModal] = useState({
+    message: '',
+    confirmationModal: false,
+  });
 
   const toggleGender = () => {
     setSelectedContact((prevState) => ({
@@ -47,6 +55,48 @@ const Contacts = () => {
       ...prevState,
       [e.target.name]: e.target.value,
     }));
+  };
+
+  const handleUpdate = (id, data) => {
+    updateContact(id, { ...data });
+    toggleModal();
+    setshowModal((prevState) =>
+      setshowModal({
+        ...prevState,
+        message: `Your contact has been saved successfully!
+        `,
+      })
+    );
+  };
+
+  const handleDelete = (id, name) => {
+    setSelectedContact({ _id: id });
+    toggleModal();
+    setshowModal((prevState) =>
+      setshowModal({
+        ...prevState,
+
+        message: `Do you want to delete the contact "${name}" ?`,
+        confirmationModal: true,
+      })
+    );
+  };
+
+  const onConfirmation = (choice) => {
+    //setIsConfirmation(!isConfirmation);
+    if (choice) {
+      deleteContact(selectedContact._id);
+    }
+
+    isModelOpened &&
+      setshowModal((prevState) =>
+        setshowModal({
+          ...prevState,
+
+          message: `Your contact has been deleted successfully!`,
+          confirmationModal: false,
+        })
+      );
   };
 
   useEffect(() => {
@@ -120,13 +170,14 @@ const Contacts = () => {
     },
   ];
 
-  console.log('updateContactData  ', updateContactData);
-  console.log('selectedContact', selectedContact);
   return (
     <>
       <div className="container max-w-screen-xl text-white mb-10">
         <div className="flex flex-row justify-between items-center mb-10">
-          <h1 className=" text-[50px] leading-[73px] font-['poppins'] font-bold ">
+          <h1
+            className=" text-[50px] leading-[73px] font-['poppins'] font-bold "
+            onClick={() => toggleModal()}
+          >
             Contacts
           </h1>
           <Link
@@ -213,7 +264,14 @@ const Contacts = () => {
                               {' '}
                               x{' '}
                             </button>
-                            <button className="p-2 bg-[#083F46] text-white text-sm rounded-2xl">
+                            <button
+                              onClick={() => {
+                                handleUpdate(contact._id, {
+                                  ...updateContactData,
+                                });
+                              }}
+                              className="p-2 bg-[#083F46] text-white text-sm rounded-2xl"
+                            >
                               save
                             </button>
                           </div>
@@ -229,7 +287,11 @@ const Contacts = () => {
                                 )}
                               />
                             </button>
-                            <button>
+                            <button
+                              onClick={() =>
+                                handleDelete(contact._id, contact.fullName)
+                              }
+                            >
                               <img src={trash} className="w-5  " />
                             </button>
                           </>
@@ -243,6 +305,13 @@ const Contacts = () => {
           )}
         </div>
       </div>
+
+      <MessageModal
+        isModelOpened={isModelOpened}
+        showModal={showModal}
+        handlePopupClose={toggleModal}
+        onConfirmation={onConfirmation}
+      />
     </>
   );
 };

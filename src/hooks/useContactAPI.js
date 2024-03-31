@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const BASE_URL = 'http://localhost:5000/api';
 
@@ -8,6 +9,13 @@ const useContactAPI = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(null);
   const [contacts, setContacts] = useState([]);
+  const [isModelOpened, setIsModelOpened] = useState(false);
+
+  const navigate = useNavigate();
+
+  const toggleModal = () => {
+    setIsModelOpened(!isModelOpened);
+  };
 
   const getContacts = async () => {
     try {
@@ -67,6 +75,7 @@ const useContactAPI = () => {
       if (res.status === 201) {
         //message.success(data.message);
         setContacts([...contacts, data.contact]);
+        navigate('/contacts');
       } else if (res.status === 400) {
         setError(data.message);
       } else {
@@ -95,6 +104,7 @@ const useContactAPI = () => {
       if (res.status === 201) {
         //message.success(data.message);
         setContacts(contacts.filter((contact) => contact._id !== contactId));
+        setIsModelOpened(true);
       } else if (res.status === 400) {
         setError(data.message);
       } else {
@@ -120,15 +130,18 @@ const useContactAPI = () => {
         body: JSON.stringify(values),
       });
       const data = await res.json();
+      console.log('data.data', data.data);
 
       if (res.status === 201) {
         //message.success(data.message);
 
         setContacts(
           contacts.map((contact) =>
-            contact._id === contactId ? data.contact : contact
+            contact._id === contactId ? data.data : contact
           )
         );
+
+        setIsModelOpened(true);
       } else if (res.status === 400) {
         setError(data.message);
       } else {
@@ -145,6 +158,8 @@ const useContactAPI = () => {
     loading,
     error,
     contacts,
+    isModelOpened,
+    toggleModal,
     addContact,
     getContacts,
     deleteContact,
