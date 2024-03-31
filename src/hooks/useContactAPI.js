@@ -133,8 +133,6 @@ const useContactAPI = () => {
       console.log('data.data', data.data);
 
       if (res.status === 201) {
-        //message.success(data.message);
-
         setContacts(
           contacts.map((contact) =>
             contact._id === contactId ? data.data : contact

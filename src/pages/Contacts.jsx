@@ -23,7 +23,6 @@ const Contacts = () => {
   const [index, setIndex] = useState(null);
   const [selectedContact, setSelectedContact] = useState({});
   const [updateContactData, setUpdateContactData] = useState({});
-  //const [isConfirmation, setIsConfirmation] = useState(false);
   const [showModal, setshowModal] = useState({
     message: '',
     confirmationModal: false,
@@ -57,16 +56,12 @@ const Contacts = () => {
     }));
   };
 
-  const handleUpdate = (id, data) => {
-    updateContact(id, { ...data });
-    toggleModal();
-    setshowModal((prevState) =>
-      setshowModal({
-        ...prevState,
-        message: `Your contact has been saved successfully!
-        `,
-      })
-    );
+  const handleUpdate = async (id, data) => {
+    await updateContact(id, { ...data });
+
+    setIndex(null);
+    setSelectedContact({});
+    setUpdateContactData({});
   };
 
   const handleDelete = (id, name) => {
@@ -174,10 +169,7 @@ const Contacts = () => {
     <>
       <div className="container max-w-screen-xl text-white mb-10">
         <div className="flex flex-row justify-between items-center mb-10">
-          <h1
-            className=" text-[50px] leading-[73px] font-['poppins'] font-bold "
-            onClick={() => toggleModal()}
-          >
+          <h1 className=" text-[50px] leading-[73px] font-['poppins'] font-bold ">
             Contacts
           </h1>
           <Link

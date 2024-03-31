@@ -21,7 +21,8 @@ const MessageModal = ({
           <div className="relative bg-white rounded-3xl shadow h-[14rem] flex flex-col justify-center items-center">
             <div className="flex flex-col items-center justify-center p-4">
               <p className="font-['poppins'] text-[30px] leading-[30px] text-[#083F46] font-medium">
-                {showModal.message}
+                {showModal.message ||
+                  'Your contact has been saved successfully!'}
               </p>
 
               {showModal.confirmationModal ? (
@@ -42,7 +43,7 @@ const MessageModal = ({
                     type="button"
                     className="mt-12 font-['poppins'] text-[30px] leading-[30px] ms-3 text-[#083F46] bg-white hover:bg-[#083F46] border-2 border-[#083F46] focus:outline-none  rounded-full    font-medium px-7 py-4 hover:text-white  focus:z-10 "
                   >
-                    Calcel
+                    Cancel
                   </button>
                 </div>
               ) : (
