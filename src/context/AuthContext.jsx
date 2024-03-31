@@ -39,9 +39,9 @@ export const AuthProvider = ({ children }) => {
   const contextValue = {
     token,
     isAuthentiated,
+    userData,
     login,
     logout,
-    userData,
   };
 
   return (
