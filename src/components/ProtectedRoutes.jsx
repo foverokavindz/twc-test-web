@@ -12,6 +12,8 @@ const ProtectedRoutes = ({ children }) => {
     }
   }, [isAuthentiated, navigate]);
 
+  console.log(import.meta.env.VITE_SOME_KEY); // "123"
+
   return children;
 };
 

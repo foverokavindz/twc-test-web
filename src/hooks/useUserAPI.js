@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
-const BASE_URL = 'http://localhost:5000/api/';
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 const useUserAPI = () => {
   const { login } = useAuth();
@@ -21,7 +21,7 @@ const useUserAPI = () => {
     try {
       setError(null);
       setLoading(true);
-      const res = await fetch(`${BASE_URL}auth/signup`, {
+      const res = await fetch(`${BASE_URL}/auth/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -51,10 +51,11 @@ const useUserAPI = () => {
   };
 
   const loginUser = async (values) => {
+    console.log('BASE_URL', BASE_URL);
     try {
       setError(null);
       setLoading(true);
-      const res = await fetch(`${BASE_URL}auth/signin`, {
+      const res = await fetch(`${BASE_URL}/auth/signin`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
