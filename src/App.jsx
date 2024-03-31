@@ -19,18 +19,30 @@ function App() {
       children: [
         {
           index: true,
-          element: <ProtectedRoutes element={<Home />} />,
+          element: (
+            <ProtectedRoutes>
+              <Home />
+            </ProtectedRoutes>
+          ),
         },
         {
           path: 'contacts',
           children: [
             {
               index: true,
-              element: <ProtectedRoutes element={<Contacts />} />,
+              element: (
+                <ProtectedRoutes>
+                  <Contacts />
+                </ProtectedRoutes>
+              ),
             },
             {
               path: 'new',
-              element: <ProtectedRoutes element={<NewContact />} />,
+              element: (
+                <ProtectedRoutes>
+                  <NewContact />
+                </ProtectedRoutes>
+              ),
             },
           ],
         },
